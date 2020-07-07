@@ -1,7 +1,7 @@
 # Full Stack Developer Challenge
 To better gauge your skills as a full stack developer, we would like you to complete the following challenge. This will help our interviewers assess your strengths, and frame the conversation through the interview process. Take as much time as you need, however we ask that you not spend more than a few hours. 
 
-At this time, we require you to use a **python based backend** (flask, django) and a **SPA framework** (reactjs, vuejs, angularjs) with **any css framework** of your choice and **any database** of your choice. If you prefer NOT using any, please provide us with reasons as to why. However, internally we use Python(flask), Bootstrap & reactjs, and it would help us to evaluate what we know and use.
+At this time, we require you to use a **Flask & Flask-RESTful** and a **SPA framework** (reactjs, vuejs, angularjs) with **any css framework** of your choice and **any database** of your choice. If you prefer NOT using any, please provide us with reasons as to why. However, internally we use Python(flask), Bootstrap & reactjs, and it would help us to evaluate what we know and use.
 
 ## Submission Instructions
 1. Fork this project on GitHub. You will need to create an account if you don't already have one
