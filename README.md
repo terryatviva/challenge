@@ -1,7 +1,7 @@
 # Full Stack Developer Challenge
 To better gauge your skills as a full stack developer, we would like you to complete the following challenge. This will help our interviewers assess your strengths, and frame the conversation through the interview process. Take as much time as you need, however we ask that you not spend more than a few hours. 
 
-At this time, we require you to use a python based backend (flask, django) and a SPA framework (reactjs, vuejs, angularjs) with any css framework of your choice and any database of your choice. If you prefer NOT using any, please provide us with reasons as to why. However, internally we use Python(flask), Bootstrap & reactjs, and it would help us to evaluate what we know and use.
+At this time, we require you to use a **python based backend** (flask, django) and a **SPA framework** (reactjs, vuejs, angularjs) with **any css framework** of your choice and **any database** of your choice. If you prefer NOT using any, please provide us with reasons as to why. However, internally we use Python(flask), Bootstrap & reactjs, and it would help us to evaluate what we know and use.
 
 ## Submission Instructions
 1. Fork this project on GitHub. You will need to create an account if you don't already have one
@@ -14,7 +14,7 @@ Imagine that we wanted to improve our products by sending out a quick survey to 
 ### What your web application must do:
 1. A simple landing page that explains that we are collecting users' opinion to improve our products.
 2. A form that asks for `name`, `date of birth`, `email`, `country`, `city`, `things that they like` 
- `things that they dislike` about our products & saves it into a database of your choice.
+ `things that they dislike` about our products, passes it to the backend via API call then saves it into a database of your choice.
 3. A quick thank you page at the end of a successful submission.
 4. A simple admin panel that lists user entries.
  
@@ -42,7 +42,5 @@ we will not need to run your code to evaluate your skills.
 
 ## What's Next?
 Once when you have submitted your work we will review your submission as soon as possible. 
-
 Please note we will only contact the selected candidates for further consideration.
-
 We thank you for taking the time to complete this development challenge and appreciate your interest in pursuing a career with us. 
