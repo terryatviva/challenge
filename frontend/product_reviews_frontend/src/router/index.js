@@ -21,6 +21,14 @@ const router = new VueRouter({
 						"../pages/ProductsData/ProductsData.vue"
 						)
 				},
+				{
+					path: "adminpanel",
+					name: "adminpanel",
+					component: () =>
+						import(
+						"../components/AdminPanel/AdminPanel.vue"
+						)
+				},
 			]
 		}
 	]

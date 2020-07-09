@@ -17,7 +17,12 @@
 						</li>
 					</ul>
 				</div>
-				<div class="col-4">
+				<div class="col-4 text-right inventory">
+					<ul>
+						<li>
+							<router-link  to="/adminpanel"><p>ADMIN - PANEL</p></router-link>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
