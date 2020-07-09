@@ -85,8 +85,8 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" @click="close()">Close</button>
-                    <button type="button" class="btn btn-primary" @click="createProductReview">SAVE</button>
-                    <!-- <button type="button" class="btn btn-primary" v-if="inventoryType === 'update'" @click="updateInvent">Update</button> -->
+                    <button type="button" class="btn btn-primary" v-if="reviewType === 'add'" @click="createProductReview">SAVE</button>
+                    <button type="button" class="btn btn-primary" v-if="reviewType === 'update'" @click="updateProductReview">Update</button>
                   </div>
                 </div>
               </div>

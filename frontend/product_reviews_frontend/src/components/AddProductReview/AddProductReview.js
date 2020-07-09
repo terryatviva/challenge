@@ -18,6 +18,8 @@ export default {
             product_id: '',
             countryList: [],
             cityList: [],
+            reviewType: '',
+            emailExists: '',
             errorpayload: {
                 name: '',
                 date_of_birth: '',
@@ -31,6 +33,7 @@ export default {
 		};
 	},
 	async created() {
+        this.reviewType = this.reviewTypeDetail
         let cities_list = []
         for (var key in json_data) {
             let country_obj, city_obj = {}
@@ -49,16 +52,22 @@ export default {
         }
         this.cityList = cities_list
         this.getAllUsersList()
+        this.getAllProductsReviewsList()
         console.log(this.userdata)
+        console.log(this.productReviewData)
 	},
 	computed: {
         ...mapState({
-			userdata: state => state.userdata.userdata,
+            userdata: state => state.userdata.userdata,
+            productReviewData: state => state.productreview.productReviewData
 		})
 	},
 	methods: {
         getAllUsersList() {
             this.$store.dispatch('userdata/getAllUsersList')
+        },
+        getAllProductsReviewsList() {
+            this.$store.dispatch('productreview/getAllProductReviewsList')
         },
         cleanErrorPayload() {
             this.errorpayload.name = ''
@@ -69,6 +78,30 @@ export default {
             this.errorpayload.likes = ''
             this.errorpayload.dislikes = ''
             this.errorpayload.product_id = ''
+        },
+        checkEmailExists() {
+            console.log(this.userdata.length)
+            let email = this.email
+            let emailExists = ''
+            let review_type = 'add'
+            let product_data = this.productData
+            let product_reviews_data = this.productReviewData
+            var res = this.userdata.map(function(el) {
+                var o = Object.assign({}, el);
+                if (o.email.toLowerCase() === email.toLowerCase()) {
+                    emailExists = o.id
+                    var result = product_reviews_data.map(function(review_data) {
+                        var obj = Object.assign({}, review_data);
+                        if (obj.user_id === o.id && obj.product_id_id === product_data.id) {
+                            review_type = 'update'
+                        }
+                        return obj
+                    })
+                }
+                return o;
+            })
+            this.reviewType = review_type
+            this.emailExists = emailExists
         },
         formValidation() {
             let msg = "This field may not be blank"
@@ -96,7 +129,6 @@ export default {
                 var day = currentTime.getDate()
                 var year = currentTime.getFullYear()
                 var currentDate = `${year}-${month}-${day}`
-                console.log(currentDate, this.date_of_birth)
                 if (currentDate < this.dob) {
                     this.errorpayload.date_of_birth = "Date of Birth exceeds current date"
                     error = false
@@ -159,18 +191,142 @@ export default {
             }
             return error
         },
-        createProductReview() {
-            console.log("camee")
+        nonEditableData() {
+            let error = true
+            if (this.emailExists) {
+                for (var i = 0; i < this.userdata.length; i++) {
+                    if (this.emailExists === this.userdata[i].id) {
+                        if (this.name !== this.userdata[i].name) {
+                            this.errorpayload.name = "Name can't be editable as Email already exists."
+                            error = false
+                        }
+                        if (this.dob !== this.userdata[i].date_of_birth) {
+                            this.errorpayload.date_of_birth = "Date of Birth can't be editable as Email already exists."
+                            error = false
+                        }
+                        if (this.email !== this.userdata[i].email) {
+                            this.errorpayload.email = "Email can't be editable as Email already exists."
+                            error = false
+                        }
+                        if (this.country !== this.userdata[i].country) {
+                            this.errorpayload.country = "Country can't be editable as Email already exists."
+                            error = false
+                        }
+                        if (this.city !== this.userdata[i].city) {
+                            this.errorpayload.city = "City can't be editable as Email already exists."
+                            error = false
+                        }
+                        break
+                    }
+                }
+            }
+            return error
+        },
+        formatDate() {
             if (this.date_of_birth) {
                 let day = this.date_of_birth.getDate()
                 let month = this.date_of_birth.getMonth() + 1
                 let year = this.date_of_birth.getFullYear()
                 this.dob = `${year}-${month}-${day}`
             }
-            console.log(this.date_of_birth)
+        },
+        async productReviewCreate(payload) {
+            console.log('-----creating starts')
+            await API.ProductReviews.createProductReview(payload).then(res => {
+                console.log(res.data)
+				if(res.status === 201) {
+                    this.getAllUsersList();
+                    this.getAllProductsReviewsList();
+                    this.$Notice.success({
+                        title: 'Product Review Success.',
+                        desc: "Successfully added comments for the product."
+                    });
+                    this.close();
+				}
+			}).catch(err => {
+                console.log(err.response.data)
+                this.$Notice.error({
+                    title: 'Product Review Failed',
+                    desc: "Failed adding comments for the product."
+                });
+            })
+        },
+        async productReviewUpdate(id, payload) {
+            console.log('----updataing starts')
+            await API.ProductReviews.updateProductReview(id, payload).then(res => {
+                console.log(res.data)
+				if(res.status === 200) {
+                    this.getAllUsersList();
+                    this.getAllProductsReviewsList();
+                    this.$Notice.success({
+                        title: 'Product Review Success.',
+                        desc: "Updated comments for the product."
+                    });
+                    this.close();
+				}
+			}).catch(err => {
+                console.log(err.response.data)
+                this.$Notice.error({
+                    title: 'Product Review Failed',
+                    desc: "Failed updating comments for the product."
+                });
+            })
+        },
+        updateProductReview() {
+            console.log("---update")
+            this.formatDate();
             this.cleanErrorPayload();
-            if (this.formValidation()) {
-                console.log("all set")
+            this.checkEmailExists();
+            if (this.formValidation() && this.nonEditableData()) {
+                console.log("all set for update")
+                let prod_id = this.productData.id
+                let usr_id = this.emailExists
+                let id = ''
+                var res = this.productReviewData.map(function(el) {
+                    var o = Object.assign({}, el);
+                    if (o.user_id === usr_id && o.product_id_id === prod_id) {
+                        id = o.id
+                    }
+                    return o;
+                })
+                let payload = {
+                    name: this.name,
+                    date_of_birth: this.dob,
+                    email: this.email,
+                    country: this.country,
+                    city: this.city,
+                    likes: this.likes,
+                    dislikes: this.dislikes,
+                    product_id: this.productData.id,
+                }
+                console.log(id)
+                console.log(payload)
+                this.productReviewUpdate(id, payload);
+            }
+        },
+        createProductReview() {
+            console.log("-----create")
+            this.formatDate();
+            this.cleanErrorPayload();
+            this.checkEmailExists();
+            if (this.formValidation() && this.nonEditableData()) {
+                console.log("all set for create")
+                let payload = {
+                    name: this.name,
+                    date_of_birth: this.dob,
+                    email: this.email,
+                    country: this.country,
+                    city: this.city,
+                    likes: this.likes,
+                    dislikes: this.dislikes,
+                    product_id: this.productData.id,
+                }
+                console.log(payload)
+                if (this.reviewType === 'add') {
+                    this.productReviewCreate(payload)
+                } else if (this.reviewType === 'update') {
+                    this.updateProductReview()
+                }
             }
         },
         close() {
