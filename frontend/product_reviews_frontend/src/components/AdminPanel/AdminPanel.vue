@@ -16,6 +16,7 @@
             <th>COUNTRY</th>
 						<th>CITY</th>
 					</thead>
+          <!-- List the Users -->
 					<tr v-for="(item, index) in userdata" :key="index">
 						<td class="text-capitalize" style="color:#1D1655">{{item.name}}</td>
             <td class="text-capitalize" style="color:#1D1655">{{item.date_of_birth}}</td>

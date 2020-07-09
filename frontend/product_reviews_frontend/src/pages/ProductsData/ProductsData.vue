@@ -5,6 +5,7 @@
 		<Divider><h4 class="p-bottom-2" style="color:#f15a22;padding: 20px 40px;">Products List</h4></Divider>
     </div>
 	<div class="clearfix"></div>
+	<!-- List the product details and Add Review Button -->
 	<div class="Inventory">
 		<div class="container">
 			<div class="users-table">

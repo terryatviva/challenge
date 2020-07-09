@@ -20,7 +20,6 @@
                           <div class="mb-30">
                             <label>NAME<sup class="err">*</sup></label>
                             <Input v-model="name" :maxlength="50" show-word-limit placeholder="Enter Name" style="width: 200px" />
-                            <!-- <h5 style="font-weight:200;">{{name}}</h5> -->
                             <transition name="fade">
                               <div class="err">{{errorpayload.name}}</div>
                             </transition>
@@ -28,7 +27,6 @@
                           <div class="mb-30"><br>
                             <label>Date Of Birth<sup class="err">*</sup></label>
                             <DatePicker type="date" v-model="date_of_birth" :start-date="new Date(1960, 4, 14)" placeholder="Select date" style="width: 200px"></DatePicker>
-                            <!-- <h5 style="font-weight:200;">{{price}}</h5> -->
                             <transition name="fade">
                               <div class="err">{{errorpayload.date_of_birth}}</div>
                             </transition>
@@ -36,7 +34,6 @@
                           <div class="mb-30"><br>
                             <label>Email Address<sup class="err">*</sup></label>
                             <Input v-model="email" type="email" :maxlength="50" show-word-limit placeholder="Enter Name" style="width: 200px" />
-                            <!-- <h5 style="font-weight:200;">{{price}}</h5> -->
                             <transition name="fade">
                               <div class="err">{{errorpayload.email}}</div>
                             </transition>
@@ -46,7 +43,6 @@
                             <Select v-model="country" filterable>
                               <Option v-for="item in countryList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                             </Select>
-                            <!-- <h5 style="font-weight:200;">{{price}}</h5> -->
                             <transition name="fade">
                               <div class="err">{{errorpayload.country}}</div>
                             </transition>
@@ -56,7 +52,6 @@
                             <Select v-model="city" filterable>
                               <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
                             </Select>
-                            <!-- <h5 style="font-weight:200;">{{price}}</h5> -->
                             <transition name="fade">
                               <div class="err">{{errorpayload.city}}</div>
                             </transition>
