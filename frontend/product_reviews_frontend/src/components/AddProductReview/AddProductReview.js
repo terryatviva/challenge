@@ -238,7 +238,7 @@ export default {
                     this.getAllUsersList();
                     this.getAllProductsReviewsList();
                     this.$Notice.success({
-                        title: 'Product Review Success.',
+                        title: 'Thank You.',
                         desc: "Successfully added comments for the product."
                     });
                     this.close();
@@ -259,7 +259,7 @@ export default {
                     this.getAllUsersList();
                     this.getAllProductsReviewsList();
                     this.$Notice.success({
-                        title: 'Product Review Success.',
+                        title: 'Thank You.',
                         desc: "Updated comments for the product."
                     });
                     this.close();
