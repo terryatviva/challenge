@@ -1,0 +1,47 @@
+[
+    {
+        "model": "api.productdata",
+        "pk": 1,
+        "fields": {
+            "name": "Olive Oil",
+            "created_on": "2020-07-08",
+            "modified_on": "2020-07-08"
+        }
+    },
+    {
+        "model": "api.productdata",
+        "pk": 2,
+        "fields": {
+            "name": "Coconut Oil",
+            "created_on": "2020-07-08",
+            "modified_on": "2020-07-08"
+        }
+    },
+    {
+        "model": "api.productdata",
+        "pk": 3,
+        "fields": {
+            "name": "Maca Powder",
+            "created_on": "2020-07-08",
+            "modified_on": "2020-07-08"
+        }
+    },
+    {
+        "model": "api.productdata",
+        "pk": 4,
+        "fields": {
+            "name": "Chia Seeds",
+            "created_on": "2020-07-08",
+            "modified_on": "2020-07-08"
+        }
+    },
+    {
+        "model": "api.productdata",
+        "pk": 5,
+        "fields": {
+            "name": "Goji Berries",
+            "created_on": "2020-07-08",
+            "modified_on": "2020-07-08"
+        }
+    }
+]

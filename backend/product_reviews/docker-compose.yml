@@ -1,0 +1,24 @@
+version: '2'
+services:
+  postgres:
+    image: postgres:9.6
+    container_name: product_reviews_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - 5432:5432
+  web:
+    build: .
+    container_name: product_reviews_backend_web
+    volumes:
+      - .:/code
+      - ./auth:/auth
+    ports:
+      - 8000:8000
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    command: bash entrypoint.sh

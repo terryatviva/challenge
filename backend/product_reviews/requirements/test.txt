@@ -1,0 +1,6 @@
+-r base.txt
+gevent==1.4.0
+gunicorn==19.9.0
+flake8==3.5.0
+coverage==4.5.1
+autoflake==1.2

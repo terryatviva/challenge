@@ -1,0 +1,71 @@
+{
+    "Afghanistan": [
+        "Herat",
+        "Kabul",
+        "Kandahar",
+        "Molah",
+        "Wazir Akbar Khan"
+    ],
+    "Albania": [
+        "Elbasan",
+        "Petran",
+        "Pogradec",
+        "Shkoder",
+        "Tirana",
+        "Ura Vajgurore"
+    ],
+    "Algeria": [
+        "Algiers",
+        "Oran",
+        "Ouargla",
+        "Oued Smar",
+        "Tlemcen"
+    ],
+    "Andorra": [
+        "Andorra la Vella",
+        "Canillo",
+        "Encamp",
+        "Sispony",
+        "Soldeu"
+    ],
+    "Antigua and Barbuda": [
+        "All Saints",
+        "Cassada Gardens",
+        "Codrington",
+        "Old Road",
+        "Parham",
+        "Woods"
+    ],
+    "Australia": [
+        "Sydney",
+        "Melbourne"
+    ],
+    "America": [
+        "New York",
+        "Washington DC",
+        "San Francisco"
+    ],
+    "India": [
+        "Chennai",
+        "Bangalore",
+        "Panaji",
+        "Hyderabad",
+        "Vijayawada",
+        "Vizag",
+        "Pune",
+        "Mumbai",
+        "Kolkatta",
+        "Delhi"
+    ],
+    "Zimbabwe": [
+        "Bulawayo",
+        "Chinhoyi",
+        "Greendale",
+        "Gwanda",
+        "Harare",
+        "Kwekwe",
+        "Mufakose",
+        "Mutare",
+        "Victoria Falls"
+    ]
+}
