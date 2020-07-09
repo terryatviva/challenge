@@ -18,11 +18,11 @@
 
 - To run single unit test module
 
-    `coverage run manage.py test api.tests.test_ProductReview`
+    `coverage run manage.py test api.tests.test_ProductReviewsViewSet`
 
 - To run single test in unit test module
 
-    `coverage run manage.py test api.tests.test_ProductReview.ProductReview.test_ProductReview_with_get_request`
+    `coverage run manage.py test api.tests.test_ProductReviewsViewSet.TestProductReviewsViewSet.test_ProductReviewsViewSet_with_get_request`
 
 ## Coverage report
 
