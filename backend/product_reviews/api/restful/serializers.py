@@ -41,6 +41,7 @@ class ProductReviewsSerializer(serializers.ModelSerializer):
         # Checks whether Email exists or not.
         product_id = self.initial_data.get('product_id')
         user_id = UserData.objects.filter(email__iexact=data)
+        # Checks whether the User have already reviewed for specific product
         if (self.context.get('request') and
             self.context.get('request').method in ['POST'] and
             user_id and ProductReviews.objects.filter(
@@ -48,6 +49,7 @@ class ProductReviewsSerializer(serializers.ModelSerializer):
             msg = "Product Review already exists for `{}`.".format(product_id)
             logger.error(msg)
             raise serializers.ValidationError(msg)
+        # Checks whether the Email Address exists or not for PUT request
         if (self.context.get('request') and
             self.context.get('request').method in ['PUT'] and
                 not user_id):
@@ -75,28 +77,37 @@ class ProductReviewsSerializer(serializers.ModelSerializer):
         return data
 
     def validate(self, data):
+        # Checks for not to modify the Customer Name, DOB, Email, Country, City
         product_id = data.get('product_id')
-        # if (self.context.get('request') and
-        #         self.context.get('request').method in ['PUT']):
         user_id = UserData.objects.filter(email__iexact=data.get('email'))
-        print(user_id)
         if user_id:
             prod_review = ProductReviews.objects.filter(
                     product_id=product_id, user=user_id[0])
             if prod_review:
-                msg = None
-                logger.info(user_id[0].name)
                 if user_id[0].name != data.get('name'):
                     msg = {"name": "Name `{}` cannot be editable".format(
                         data.get('name'))}
+                    logger.error(msg)
+                    raise serializers.ValidationError(msg)
                 if user_id[0].date_of_birth != data.get('date_of_birth'):
                     msg = {"date_of_birth":
                            "Date of Birth `{}` cannot be editable".format(
                             data.get('date_of_birth'))}
+                    logger.error(msg)
+                    raise serializers.ValidationError(msg)
                 if user_id[0].email != data.get('email'):
                     msg = {"email": "Email `{}` cannot be editable".format(
                         data.get('email'))}
-                if msg:
+                    logger.error(msg)
+                    raise serializers.ValidationError(msg)
+                if user_id[0].country != data.get('country'):
+                    msg = {"country": "Country `{}` cannot be editable".format(
+                        data.get('country'))}
+                    logger.error(msg)
+                    raise serializers.ValidationError(msg)
+                if user_id[0].city != data.get('city'):
+                    msg = {"city": "City `{}` cannot be editable".format(
+                        data.get('city'))}
                     logger.error(msg)
                     raise serializers.ValidationError(msg)
         return data
@@ -121,7 +132,7 @@ class ProductReviewsSerializer(serializers.ModelSerializer):
         exclude = ('audit_status',)
 
     def create(self, validated_data):
-        print("came")
+        # Pops the user data and populates its field to UserData Model
         name = validated_data.pop('name')
         date_of_birth = validated_data.pop('date_of_birth')
         email = validated_data.pop('email')
@@ -134,14 +145,14 @@ class ProductReviewsSerializer(serializers.ModelSerializer):
             "country": country,
             "city": city
         }
+        # Checks User Email exists or not and then updates for product
         user_data = UserData.objects.filter(email__iexact=email)
         if user_data:
             user_data = user_data[0]
         else:
             user_data = UserData.objects.create(**user_data_obj)
-        print(user_data)
         validated_data['user'] = user_data
-        print(validated_data)
+        # Populates Product data in ProductReviews Model
         product_review = ProductReviews.objects.create(**validated_data)
         product_review.name = name
         product_review.date_of_birth = date_of_birth
@@ -151,9 +162,11 @@ class ProductReviewsSerializer(serializers.ModelSerializer):
         return product_review
 
     def update(self, instance, validated_data):
+        # Updates the Customer likes and dislikes for specific instance
         instance.likes = validated_data.get('likes')
         instance.dislikes = validated_data.get('dislikes')
-        return instance
+        instance.save()
+        return validated_data
 
 
 class ProductDataSerializer(serializers.ModelSerializer):

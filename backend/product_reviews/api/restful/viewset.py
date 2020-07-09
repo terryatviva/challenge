@@ -56,6 +56,7 @@ class ProductReviewsViewSet(viewsets.ModelViewSet):
         """
             Retrieve specific product details review
         """
+        # Checks whether the given pk is positive or not.
         if not (check_positivenum(pk)):
             raise_value = {"id": "User Id `{0}` must be an Positive Integer."
                            .format(pk)}
