@@ -10,7 +10,7 @@
 			<div class="users-table">
 				<table class="user-table-tabs">
 					<thead>
-						<th>NAME</th>
+						<th>PRODUCT NAME</th>
 						<th>ACTIONS</th>
 					</thead>
 					<tr v-for="(item, index) in productsData" :key="index">
