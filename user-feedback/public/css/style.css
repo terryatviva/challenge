@@ -1,0 +1,28 @@
+.cv-btn {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-radius: 9999px;
+    min-width: 16rem;
+    padding: 0.5rem 1.25rem;
+}
+.cv-btn-primary {
+    color: #ffffff;
+    background: rgb(240, 115, 56);
+    background: linear-gradient(90deg, #42cbf5 0%, #42cbf5 100%);
+}
+.cv-btn-outline-primary {
+    color: #ffffff;  
+    border: solid 1px transparent;
+    background-image: linear-gradient(90deg, #42cbf5 0%, #42cbf5 100%);  
+    box-shadow: 2px 1000px 1px #070707 inset;
+}
+.bg-custom{
+    background-color: #42cbf5;
+    color: #ffffff;
+}
+.cv-btn-custom{
+    color: #42cbf5;
+    background: white;
+}
