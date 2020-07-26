@@ -34,7 +34,7 @@ export default {
     Axios.get("http://localhost:8080/userFeedbacks").then((response) => {
       console.log("response", response);
       this.feedbackList = response.data;
-      $("#user-response").DataTable({
+      let datatable = $("#user-response").DataTable({
         data: this.feedbackList,
 
         columns: [
@@ -43,7 +43,7 @@ export default {
           },
           {
             data: "dateOfBirth",
-            render: function (data, type, full, meta) {
+            render: function (data) {
               return moment(data).format("MMM Do YYYY");
             },
           },
