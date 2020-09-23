@@ -24,7 +24,7 @@ There are many ways that this application could be built; we ask that you build 
 
 Once you're done, please submit a paragraph or two in your `README` about what you are particularly proud of in your implementation, and why.
 
-## Evaluation
+## Evaluation## determination
 Evaluation of your submission will be based on the following criteria. 
 
 1. Did your application fulfill the basic requirements?
