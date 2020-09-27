@@ -14,7 +14,7 @@ Imagine that we wanted to improve our products by sending out a quick survey to 
 ### What your web application must do:
 1. A simple landing page that explains that we are collecting users' opinion to improve our products.
 2. A form that asks for `name`, `date of birth`, `email`, `country`, `city`, `things that they like` 
- `things that they dislike` about our products, passes it to the backend via API call then saves it into a database of your choice.
+ `things that they dislike` a   bout our products, passes it to the backend via API call then saves it into a database of your choice.
 3. A quick thank you page at the end of a successful submission.
 4. A simple admin panel that lists user entries.
  
