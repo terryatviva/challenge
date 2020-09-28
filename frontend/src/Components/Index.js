@@ -9,7 +9,7 @@ function Index() {
     const submitForm = (e) => {
         e.preventDefault();
         console.log('submit form', formData);
-        axios.post("http://127.0.0.1:4000/submit", {
+        axios.post("/submit", {
         data: JSON.stringify(formData),
     })
         .then(response => setCompleted(true))

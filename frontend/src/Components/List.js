@@ -5,7 +5,7 @@ import { ListGroup, ListGroupItem } from 'react-bootstrap';
 function List() {
     let [userDetails, setUsserDetails] = useState([]);
     useEffect(() => {
-        axios.get("http://127.0.0.1:4000/list").then(response => {
+        axios.get("/list").then(response => {
             setUsserDetails(response.data)
     })
         }, []

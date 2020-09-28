@@ -22,9 +22,6 @@ class User(db.Model):
     like = db.Column('Like', db.String(120), unique=True, nullable=False)
     dislike = db.Column('Dislike', db.String(120), unique=True, nullable=False)
 
-    def __repr__(self):
-        return '<User %r>' % self.username
-
     @staticmethod
     def insert_into_user_account(username, email, city, country, date_of_birth, like, dislike):
         user_acc_obj = User(username=username, email=email, city=city, country=country, date_of_birth=date_of_birth,
@@ -37,21 +34,10 @@ parser = reqparse.RequestParser()
 parser.add_argument('data')
 
 
-class HelloWorld(Resource):
-    def get(self):
-        return {'hello': 'world'}
-
-    def post(self):
-        args =  parser.parse_args()
-        return jsonify(args)
-
-
 class SubmitForm(Resource):
     def post(self):
         args =  parser.parse_args()
-        print('kkkkkkkkkk',args)
         user = json.loads(args.data)
-        print('jj', user['name'])
         try:
             User.insert_into_user_account(
                 username=user['name'],
@@ -63,7 +49,6 @@ class SubmitForm(Resource):
                 dislike=user['dislike']
             )
             db.session.commit()
-            print('committed')
 
         except Exception as e:
             db.session.rollback()
@@ -77,7 +62,6 @@ class ListData(Resource):
         json_res = []
         for result in data:
             temp_obj = {}
-            print(result)
             temp_obj['name'] = result.username
             temp_obj['email'] = result.email
             temp_obj['city'] = result.city
@@ -89,7 +73,7 @@ class ListData(Resource):
 
         return jsonify(json_res)
 
-api.add_resource(HelloWorld, '/')
+
 api.add_resource(SubmitForm, '/submit')
 api.add_resource(ListData, '/list')
 
