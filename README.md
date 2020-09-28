@@ -44,3 +44,21 @@ we will not need to run your code to evaluate your skills.
 Once when you have submitted your work we will review your submission as soon as possible. 
 Please note we will only contact the selected candidates for further consideration.
 We thank you for taking the time to complete this development challenge and appreciate your interest in pursuing a career with us. 
+
+
+## Project Setup
+1. Go to Project Directory
+2. Inside backend folder, run 
+    1. pip install requirements.txt 
+    2. python app.py
+3. Inside frontend folder, run
+    1. npm install
+    2. npm start
+    
+## Stack Used
+1. Flask
+2. Flask-restful
+3. ReactJS
+4. Sqlite Database
+    
+    

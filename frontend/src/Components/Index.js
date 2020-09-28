@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Row, Container, Button } from 'react-bootstrap';
 import { Form } from "react-bootstrap";
 import axios from "axios"
@@ -6,14 +6,47 @@ import axios from "axios"
 function Index() {
     let [formData, setFormData]  = useState({});
     let [completed, setCompleted]  = useState(false);
+    let [error, setError]  = useState(false);
+    const firstFetch = useRef(true)
+    useEffect(()=> {
+        if (firstFetch.current){
+            let formSchema = {
+                'name':'',
+                'email': '',
+                'city': '',
+                'country':'',
+                'DOB':'',
+                'like':'',
+                'dislike': ''
+            }
+            setFormData(formSchema);
+            firstFetch.current = false
+        }
+    }, [])
+
     const submitForm = (e) => {
         e.preventDefault();
-        console.log('submit form', formData);
-        axios.post("/submit", {
-        data: JSON.stringify(formData),
-    })
-        .then(response => setCompleted(true))
+        let isValidate = validate();
+        if (isValidate) {
+            axios.post("/submit", {
+                data: JSON.stringify(formData),
+            }).then(response => {
+                if (response.data.message === undefined)
+                    setCompleted(true)
+            })
+        }
     };
+
+    const validate = () => {
+        let out = true;
+        Object.keys(formData).forEach((key) => {
+            if (formData[key] === '') {
+                setError('All fields are required');
+                out = false
+            }
+        });
+        return out
+    }
 
     const updateData=(field, data)=>{
         let temp_obj = formData;
@@ -22,12 +55,14 @@ function Index() {
     };
     return (
     <>
-        {!completed ?  <Container style={{padding: 30}}>
+        {!completed ?  <Container style={{padding: '0 30px'}}>
             <Row>
+                <h2>User Survey</h2>
                 We are collecting our customers' views to provide the better quality products. Please provide us your
                 opinion about our products by filling the following form:
             </Row>
-            <div style={{ padding: '10px 0' }}>
+            <div style={{ padding: '10px 40px' }}>
+                {error && <div style={{color: 'red'}}>{error}</div>}
                 <Form onSubmit={submitForm}>
                     <Form.Group controlId="formGroupName">
                     <div>
@@ -39,7 +74,7 @@ function Index() {
                     <div>
                       <Form.Label>Date Of Birth</Form.Label>
                     </div>
-                    <Form.Control type="text" placeholder="Enter Date Of Birth" onChange={(e) => updateData('DOB', e.target.value)} />
+                    <Form.Control type="date" placeholder="Enter Date Of Birth" onChange={(e) => updateData('DOB', e.target.value)} />
                     </Form.Group>
                     <Form.Group controlId="formGroupEmail">
                     <div>

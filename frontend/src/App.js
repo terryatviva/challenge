@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Index from './Components/Index'
 import List from './Components/List'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import {Navbar} from "react-bootstrap";
 import logo from "./Components/logo.png";
 
@@ -11,7 +11,7 @@ function App() {
   return (
     <Router>
            <div>
-               <Navbar bg="dark" style = {{height: 80}}>
+               <Navbar bg="dark" style = {{height: 110}}>
             <Navbar.Brand>
                 <img
                 src={logo}

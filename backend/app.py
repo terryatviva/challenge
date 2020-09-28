@@ -14,13 +14,13 @@ db = SQLAlchemy(app)
 
 class User(db.Model):
     id = db.Column('ID', db.Integer, primary_key=True)
-    username = db.Column('Name', db.String(80), unique=True, nullable=False)
-    email = db.Column('Email', db.String(120), unique=True, nullable=False)
-    city = db.Column('City', db.String(120), unique=True, nullable=False)
-    country = db.Column('Country', db.String(120), unique=True, nullable=False)
-    date_of_birth = db.Column('Date_Of_Birth', db.String(120), unique=True, nullable=False)
-    like = db.Column('Like', db.String(120), unique=True, nullable=False)
-    dislike = db.Column('Dislike', db.String(120), unique=True, nullable=False)
+    username = db.Column('Name', db.String(80), nullable=False)
+    email = db.Column('Email', db.String(120), nullable=False)
+    city = db.Column('City', db.String(120), nullable=False)
+    country = db.Column('Country', db.String(120), nullable=False)
+    date_of_birth = db.Column('Date_Of_Birth', db.String(120), nullable=False)
+    like = db.Column('Like', db.String(120), nullable=False)
+    dislike = db.Column('Dislike', db.String(120), nullable=False)
 
     @staticmethod
     def insert_into_user_account(username, email, city, country, date_of_birth, like, dislike):
@@ -52,6 +52,7 @@ class SubmitForm(Resource):
 
         except Exception as e:
             db.session.rollback()
+            return {'status': 400, 'message': 'Invalid data'}
 
         return jsonify(args)
 
@@ -62,11 +63,12 @@ class ListData(Resource):
         json_res = []
         for result in data:
             temp_obj = {}
+            temp_obj['id'] = result.id
             temp_obj['name'] = result.username
             temp_obj['email'] = result.email
             temp_obj['city'] = result.city
             temp_obj['country'] = result.country
-            temp_obj['DOB'] = result.date_of_birth
+            temp_obj['Date Of Birth'] = result.date_of_birth
             temp_obj['like'] = result.like
             temp_obj['dislike'] = result.dislike
             json_res.append(temp_obj)
