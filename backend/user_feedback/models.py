@@ -1,8 +1,9 @@
 from user_feedback import db
 
+
 class User(db.Model):
     __tablename__ = 'user'
-    
+
     id = db.Column('id', db.Integer, primary_key=True)
     name = db.Column('name', db.String(250), nullable=False)
     date_of_birth = db.Column('date_of_birth', db.Date, nullable=False)
@@ -17,7 +18,7 @@ class User(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'date_of_birth': self.date_of_birth,
+            'date_of_birth': self.date_of_birth.strftime('%Y-%m-%d'),
             'email': self.email,
             'country': self.country,
             'city': self.city,
